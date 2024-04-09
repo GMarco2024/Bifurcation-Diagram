@@ -15,7 +15,6 @@ extension Double {
     }
 }
 
-
 postfix operator ❗️
 extension Double {
     static postfix func ❗️(left: Double) -> Double {

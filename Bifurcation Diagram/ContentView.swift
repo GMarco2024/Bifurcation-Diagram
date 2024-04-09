@@ -37,14 +37,11 @@ struct ContentView: View {
                             LineMark(
                                 x: .value("Position", $0.xVal),
                                 y: .value("Height", $0.yVal)
-                                
                             )
                             .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
                             PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
                             
                                 .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
-                            
-                            
                         }
                         .chartYScale(domain: [ plotData.plotArray[selector].changingPlotParameters.yMin ,  plotData.plotArray[selector].changingPlotParameters.yMax ])
                         .chartXScale(domain: [ plotData.plotArray[selector].changingPlotParameters.xMin ,  plotData.plotArray[selector].changingPlotParameters.xMax ])
@@ -56,7 +53,7 @@ struct ContentView: View {
                             .foregroundColor(.red)
                     }
                 }
-                // .frame(width: 350, height: 400, alignment: .center)
+           
                 .frame(alignment: .center)
                 
             }
@@ -64,12 +61,9 @@ struct ContentView: View {
         .padding()
         
         Divider()
-        
-        // TextField for entering N above the "plotSN3" button
-      
-    
+            
             HStack {
-                            Button("Plot Relative Difference", action: {
+                            Button("Plot Bifurcation Diagram", action: {
                                 Task {
                                     self.selector = 0
                                     await self.calculate()
@@ -85,7 +79,6 @@ struct ContentView: View {
         calculator.plotDataModel = self.plotData.plotArray[selector]
     }
     
-    
     /// calculate
     /// Function accepts the command to start the calculation from the GUI
     func calculate() async {
@@ -94,53 +87,30 @@ struct ContentView: View {
         
         await setupPlotDataModel(selector: 0)
         
+        let _ = await withTaskGroup(of:  Void.self) { taskGroup in
             
-            let _ = await withTaskGroup(of:  Void.self) { taskGroup in
-
-
-
-                taskGroup.addTask {
-
-        
-        
-        //Calculate the new plotting data and place in the plotDataModel
-        await calculator.plotLogisticMapBifurcation()
-        
-             
-                }
-
+            taskGroup.addTask {
                 
+                //Calculate the new plotting data and place in the plotDataModel
+                await calculator.plotLogisticMapBifurcation()
             }
             
-  
-        
-        
+        }
     }
-    
-    
     /// calculate
     /// Function accepts the command to start the calculation from the GUI
     func calculate2() async {
         
-        
         //pass the plotDataModel to the Calculator
         
         await setupPlotDataModel(selector: 1)
-        
-            
-            
+                
             let _ = await withTaskGroup(of:  Void.self) { taskGroup in
 
-
-
                 taskGroup.addTask {
-
             }
-                
         }
-        
     }
-    
 }
 
 #Preview {
