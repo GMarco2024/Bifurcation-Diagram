@@ -29,8 +29,8 @@ import Observation
         changingPlotParameters.yMin = 0.0
         changingPlotParameters.xMax = 4.0
         changingPlotParameters.xMin = 1.0
-        changingPlotParameters.xLabel = "x"
-        changingPlotParameters.yLabel = "y"
+        changingPlotParameters.xLabel = "µ"
+        changingPlotParameters.yLabel = "X^*"
         changingPlotParameters.lineColor = Color.green
         changingPlotParameters.title = "Initial Plot"
     }

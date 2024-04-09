@@ -17,11 +17,7 @@ class CalculatePlotData: ObservableObject {
     
     @Published var plotDataModel: PlotDataClass? = nil
     
-    /// Plots the bifurcation diagram for the logistic map.
- 
-    
     // These are the class variables
-    
     func plotLogisticMapBifurcation() async {
         let minR = 1.0
         let maxR = 4.0
@@ -29,7 +25,6 @@ class CalculatePlotData: ObservableObject {
         var plotData: [(x: Double, y: Double)] = []
         
         //mu loop. In this case, mu is r.
-        
         for r in stride(from: minR, through: maxR, by: step)
         
         {
