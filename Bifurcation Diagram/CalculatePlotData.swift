@@ -28,7 +28,7 @@ class CalculatePlotData: ObservableObject {
         let step = 0.01
         var plotData: [(x: Double, y: Double)] = []
         
-        //mu loop
+        //mu loop. In this case, mu is r.
         
         for r in stride(from: minR, through: maxR, by: step)
         
