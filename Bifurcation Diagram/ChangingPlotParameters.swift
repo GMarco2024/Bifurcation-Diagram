@@ -14,8 +14,8 @@ class ChangingPlotParameters: ObservableObject {
     
     // These plot parameters are adjustable and can be dynamically updated
     
-    @Published var xLabel: String = "µ"
-    @Published var yLabel: String = "X^*"
+    @Published var xLabel: String = "Growth Rate (µ)"
+    @Published var yLabel: String = "Attractor Population (X^*)"
     @Published var xMax: Double = 2.0
     @Published var yMax: Double = 2.0
     @Published var yMin: Double = -1.0
