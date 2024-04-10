@@ -17,20 +17,22 @@ class CalculatePlotData: ObservableObject {
     
     @Published var plotDataModel: PlotDataClass? = nil
     
-    // These are the class variables
+    //THese are the class variables
     func plotLogisticMapBifurcation() async {
         let minR = 1.0
         let maxR = 4.0
-        let step = 0.01
+        
+        // Total number of steps
+        let totalSteps = 1000
+        
+        // THis calculates the step size
+        let step = (maxR - minR) / Double(totalSteps)
         var plotData: [(x: Double, y: Double)] = []
         
-        //mu loop. In this case, mu is r.
-        for r in stride(from: minR, through: maxR, by: step)
-        
-        {
+        // mu loop. In this case, mu is r.
+        for r in stride(from: minR, through: maxR, by: step) {
             
-            //Arbituary seed
-            var y = 0.5
+            var y = 0.5 // Arbitrary seed
             
             // Transients
             for _ in 1...200 {
