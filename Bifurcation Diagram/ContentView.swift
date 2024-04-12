@@ -14,6 +14,7 @@ struct ContentView: View {
     
     @StateObject private var calculator = CalculatePlotData()
     @State private var inputN4: String = ""
+    @State private var resultText: String = ""
     @State var isChecked:Bool = false
     @State var tempInput = ""
     @State var selector = 0
@@ -71,6 +72,20 @@ struct ContentView: View {
                             })
                             .padding()
                         }
+                    
+            VStack {
+                TextEditor(text: $resultText)
+                    .padding()
+                    .frame(width: 500, height: 100)
+                    .disabled(true)
+                            
+                Button("Copy"){
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.clearContents()
+                    pasteboard.setString(resultText, forType: .string)
+                }
+            }
+                        .padding(.bottom)
                     }
                 }
     
@@ -95,20 +110,6 @@ struct ContentView: View {
                 await calculator.plotLogisticMapBifurcation()
             }
             
-        }
-    }
-    /// calculate
-    /// Function accepts the command to start the calculation from the GUI
-    func calculate2() async {
-        
-        //pass the plotDataModel to the Calculator
-        
-        await setupPlotDataModel(selector: 1)
-                
-            let _ = await withTaskGroup(of:  Void.self) { taskGroup in
-
-                taskGroup.addTask {
-            }
         }
     }
 }
