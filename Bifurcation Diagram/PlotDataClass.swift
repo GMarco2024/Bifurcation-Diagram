@@ -32,6 +32,7 @@ import Observation
         changingPlotParameters.xLabel = "Growth Rate (µ)"
         changingPlotParameters.yLabel = "Attractor Populations (X^*)"
         changingPlotParameters.lineColor = Color.blue
+        changingPlotParameters.shouldIPlotPointLines = false
         changingPlotParameters.title = "Initial Plot"
     }
 

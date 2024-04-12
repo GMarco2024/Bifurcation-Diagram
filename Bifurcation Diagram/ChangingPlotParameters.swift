@@ -21,6 +21,7 @@ class ChangingPlotParameters: ObservableObject {
     @Published var yMin: Double = -1.0
     @Published var xMin: Double = -1.0
     @Published var lineColor: Color = Color.blue
+    @Published var shouldIPlotPointLines = false
     @Published var title: String = "Plot Title"
     
     }

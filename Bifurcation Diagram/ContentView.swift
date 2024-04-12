@@ -35,12 +35,17 @@ struct ContentView: View {
                         .padding()
                     VStack {
                         Chart($plotData.plotArray[selector].plotData.wrappedValue) {
-                            LineMark(
-                                x: .value("Position", $0.xVal),
-                                y: .value("Height", $0.yVal)
-                            )
-                            .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                            
+                         
+                            if ($plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines.wrappedValue) {
+                                LineMark(
+                                    x: .value("Position", $0.xVal),
+                                    y: .value("Height", $0.yVal)
+                                )
+                                .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)} 
                             PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
+                            
+                                .symbolSize( 1 )
                             
                                 .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
                         }
