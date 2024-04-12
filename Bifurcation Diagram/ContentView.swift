@@ -94,31 +94,41 @@ struct ContentView: View {
                     }
                 }
     
-    @MainActor func setupPlotDataModel(selector: Int){
+    @MainActor func setupPlotDataModel(selector: Int) {
+            calculator.plotDataModel = plotData.plotArray[selector]
+        }
         
-        calculator.plotDataModel = self.plotData.plotArray[selector]
-    }
-    
-    /// calculate
-    /// Function accepts the command to start the calculation from the GUI
-    func calculate() async {
-        
-        //pass the plotDataModel to the Calculator
-        
-        await setupPlotDataModel(selector: 0)
-        
-        let _ = await withTaskGroup(of:  Void.self) { taskGroup in
+        func calculate() async {
+            await setupPlotDataModel(selector: 0)
             
-            taskGroup.addTask {
-                
-                //Calculate the new plotting data and place in the plotDataModel
-                await calculator.plotLogisticMapBifurcation()
+            let _ = await withTaskGroup(of: Void.self) { taskGroup in
+                taskGroup.addTask {
+                    await calculator.plotLogisticMapBifurcation()
+                }
             }
+            xyValuesOfPlot()
+        }
+
+    
+    
+    func xyValuesOfPlot() {
+        let data = plotData.plotArray[selector].plotData
+        let formattedText = data.map { String(format: "X = %.4f, y = %.4f", $0.xVal, $0.yVal) }.joined(separator: "\n")
+        DispatchQueue.main.async {
+            resultText = formattedText
             
         }
     }
-}
 
-#Preview {
-    ContentView()
-}
+            }
+        
+ 
+    
+
+    //Preview
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
+ 
+        }
+    }
