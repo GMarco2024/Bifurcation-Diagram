@@ -1,8 +1,9 @@
 //
 //  ContentView.swift
-//  Charts Plot Observation
+//  Bifurcation Diagram
 //
 //  Created by Jeff_Terry on 1/15/24.
+//  MOdified by Marco Gonzalez
 //
 
 import SwiftUI

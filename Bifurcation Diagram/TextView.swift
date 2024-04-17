@@ -1,8 +1,10 @@
 //
 //  TextView.swift
-//   Tab for Displaying and saving text
+//  Bifurcation Diagram
+//  Tab for Displaying and saving text
 //
 //  Created by Jeff Terry on 1/23/21.
+//  Modified by Marco Gonzalez 2/11/24
 //
 
 import SwiftUI
@@ -27,7 +29,7 @@ struct TextView: View {
             TextEditor(text: $plotData.plotArray[textSelector].calculatedText )
             
             
-          
+            
         }
         .padding()
         .fileImporter(
@@ -48,7 +50,7 @@ struct TextView: View {
                     document.message = message
                     
                     plotData.plotArray[0].calculatedText = message
-                        
+                    
                     //done accessing the url
                     CFURLStopAccessingSecurityScopedResource(selectedFile as CFURL)
                 }
@@ -72,11 +74,7 @@ struct TextView: View {
                 // Handle failure.
             }
         }
-        
-        
-        
     }
-    
 }
 
 #Preview {

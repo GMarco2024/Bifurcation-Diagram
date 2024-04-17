@@ -1,11 +1,11 @@
 //
 //  CalculatePlotData.swift
-//  Charts Plot Observation
+//  Bifurcation Diagram
 //
 //  Created by Jeff_Terry on 1/15/24.
 //  Modified by Marco Gonzalez 2/11/24
 //
-// The following is based off the "Bugs.java: Bifurcation diagram for logistic map" code from page 294.
+//  The following is based off the "Bugs.java: Bifurcation diagram for logistic map" code from page 294.
 //
 
 import Foundation

@@ -1,8 +1,9 @@
 //
 //  TextExportDocument.swift
-//   Filewrapper for text
+//  Filewrapper for text
 //
 //  Created by Jeff Terry on 1/23/21.
+//  Modified by Marco Gonzalez 2/11/24
 //
 //  Based upon code from https://github.com/acwright/ImportExport
 //
