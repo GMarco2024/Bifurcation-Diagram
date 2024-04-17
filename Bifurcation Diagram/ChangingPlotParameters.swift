@@ -12,8 +12,8 @@ import Observation
     
     //These plot parameters are adjustable
     
-    var xLabel: String = "Growth Rate (µ)"
-    var yLabel: String = "Attractor Population (X^*)"
+    var xLabel: String = ""
+    var yLabel: String = ""
     var xMax : Double = 2.0
     var yMax : Double = 2.0
     var yMin : Double = -1.0

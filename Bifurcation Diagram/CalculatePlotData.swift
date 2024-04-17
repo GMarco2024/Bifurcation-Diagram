@@ -61,40 +61,31 @@ import Observation
     func plotLogisticMapBifurcation() async {
         let minR = 1.0
         let maxR = 4.0
-        
-        //Total number of steps
         let totalSteps = 1000
-        
-        // This calculates the step size
         let step = (maxR - minR) / Double(totalSteps)
         var plotData: [(x: Double, y: Double)] = []
-        var theText = "Growth Rate (µ), Attractor Populations (X^*)"
-        
-        
-        //mu loop. In this case, mu is r.
-        for r in stride(from: minR, through: maxR, by: step) {
-            
-        // Arbituary seed
-            var y = 0.5
+        var theText = "µ, X^*"
 
-        // Transients
+        for r in stride(from: minR, through: maxR, by: step) {
+            var y = 0.5
             for _ in 1...200 {
                 y = r * y * (1 - y)
             }
-
-            // Calculates stable points for display and plotting. The first 200 are skipped.
-            
             for _ in 201...401 {
                 y = r * y * (1 - y)
-                plotData.append((x: r, y: y))
-                theText += "\(r), \(y)\n"
+                
+    // We let decimalR and decimalY be the modifications for the lited text in which the values are set to 4 decimal places.
+                
+                let decimalR = Double(round(10000 * r) / 10000)
+                let decimalY = Double(round(10000 * y) / 10000)
+                plotData.append((x: decimalR, y: decimalY))
+                theText += "\(decimalR), \(decimalY)\n"
+                
             }
         }
 
-        // Set plot parameters
-        await setThePlotParameters(color: "Blue", xLabel: "Growth Rate (µ)", yLabel: "Attractor Population (X^*)", title: "Logistic Map Bifurcation", xMin: minR, xMax: maxR, yMin: 0, yMax: 1)
+       
 
-        // Append the data to the plot and update the text
         await appendDataToPlot(plotData: plotData)
         await updateCalculatedTextOnMainThread(theText: theText)
     }
