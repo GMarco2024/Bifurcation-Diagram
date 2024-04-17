@@ -7,24 +7,22 @@
 //
 
 import SwiftUI
-import Combine
-
-@MainActor
-class ChangingPlotParameters: ObservableObject {
+import Observation
+@Observable class ChangingPlotParameters {
     
-    // These plot parameters are adjustable and can be dynamically updated
+    //These plot parameters are adjustable
     
-    @Published var xLabel: String = "Growth Rate (µ)"
-    @Published var yLabel: String = "Attractor Population (X^*)"
-    @Published var xMax: Double = 2.0
-    @Published var yMax: Double = 2.0
-    @Published var yMin: Double = -1.0
-    @Published var xMin: Double = -1.0
-    @Published var lineColor: Color = Color.blue
-    @Published var shouldIPlotPointLines = false
-    @Published var title: String = "Plot Title"
+    var xLabel: String = "Growth Rate (µ)"
+    var yLabel: String = "Attractor Population (X^*)"
+    var xMax : Double = 2.0
+    var yMax : Double = 2.0
+    var yMin : Double = -1.0
+    var xMin : Double = -1.0
+    var lineColor: Color = Color.blue
+    var shouldIPlotPointLines = false
+    var title: String = "Bifurcation Diagram"
     
-    }
+}
     
 
 

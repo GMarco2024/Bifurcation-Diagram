@@ -14,17 +14,26 @@ import Observation
     
     @MainActor var plotData = [PlotDataStruct]()
     @MainActor var changingPlotParameters: ChangingPlotParameters = ChangingPlotParameters()
-
+    @MainActor var calculatedText = ""
+    @MainActor var pointNumber = 1.0
+    
     init(fromLine line: Bool) {
-        Task {
+        
+        Task{
             await self.plotBlank()
+            
         }
-    }
-
+        
+       }
+    
+    
+    
     /// Displays a Blank Chart
-    @MainActor func plotBlank() {
+    @MainActor func plotBlank()
+    {
         zeroData()
-        // Set the Plot Parameters for a blank state or initial view
+        
+        //set the Plot Parameters
         changingPlotParameters.yMax = 1.0
         changingPlotParameters.yMin = 0.0
         changingPlotParameters.xMax = 4.0
@@ -33,23 +42,37 @@ import Observation
         changingPlotParameters.yLabel = "Attractor Populations (X^*)"
         changingPlotParameters.lineColor = Color.blue
         changingPlotParameters.shouldIPlotPointLines = false
-        changingPlotParameters.title = "Initial Plot"
+        changingPlotParameters.title = "Initial PLot"
+        
+        
+        
     }
-
+    
     /// Zeros Out The Data Being Plotted
-    @MainActor func zeroData() {
-        plotData = []
-  
-    }
-
-    /// Append Data appends Data to the Plot.
-    /// - Parameter dataPoint: Array of (x, y) data for plotting
-    @MainActor func appendData(dataPoint: [(x: Double, y: Double)]) {
-        for item in dataPoint {
-            let dataValue: [PlotDataStruct] = [.init(xVal: item.x, yVal: item.y)]
-            plotData.append(contentsOf: dataValue)
-       
+    @MainActor func zeroData(){
+            
+            plotData = []
+            pointNumber = 1.0
+            
         }
-    }
+    
+    /// Append Data appends Data to the Plot. Increments the pointNumber for 1-D Data
+    /// - Parameter dataPoint: Array of (x, y) data for plotting
+    @MainActor func appendData(dataPoint: [(x: Double, y: Double)])
+        {
+          
+            for item in dataPoint{
+                
+                let dataValue :[PlotDataStruct] =  [.init(xVal: item.x, yVal: item.y)]
+                
+                plotData.append(contentsOf: dataValue)
+                pointNumber += 1.0
+                
+            }
+            
+        }
+    
+    
+
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Observation
 
 @main
 struct Bifurcation_DiagramApp: App {
@@ -14,8 +15,21 @@ struct Bifurcation_DiagramApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(plotData)
+            TabView {
+                ContentView()
+                    .environment(plotData)
+                    .tabItem {
+                        Text("Plot")
+                    }
+                TextView()
+                    .environment(plotData)
+                    .tabItem {
+                        Text("Text")
+                    }
+                            
+                            
+            }
+            
         }
     }
 }
