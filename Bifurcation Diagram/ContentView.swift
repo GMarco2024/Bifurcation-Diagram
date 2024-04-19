@@ -13,8 +13,6 @@ struct ContentView: View {
     @Environment(PlotClass.self) var plotData
     
     @State private var calculator = CalculatePlotData()
-    @State var isChecked:Bool = false
-    @State var tempInput = ""
     
     @State var selector = 0
     
