@@ -13,8 +13,8 @@ struct ContentView: View {
     @EnvironmentObject var plotData: PlotClass
     
     @State private var calculator = CalculatePlotData()
-    @State private var minX: Double = 1.0
-    @State private var maxX: Double = 4.0
+    @State private var minX: String = "1.0"
+    @State private var maxX: String = "4.0"
     
     @State var selector = 0
 
@@ -22,27 +22,24 @@ struct ContentView: View {
         VStack {
             Group {
                 HStack(alignment: .center, spacing: 0) {
-                    Text($plotData.plotArray[selector].changingPlotParameters.yLabel.wrappedValue)
+                    Text(plotData.plotArray[selector].changingPlotParameters.yLabel)
                         .rotationEffect(Angle(degrees: -90))
                         .foregroundColor(.red)
                         .padding()
                     VStack {
-                        Chart($plotData.plotArray[selector].plotData.wrappedValue) {
-                            
-                            
-                            if ($plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines.wrappedValue) {
-                                                            LineMark(
-                                                                x: .value("Position", $0.xVal),
-                                                                y: .value("Height", $0.yVal)
-                                                            )
-                                                            .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)}
-                                                        PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
-                                                        
-                                                            .symbolSize( 1 )
-                                                        
-                                                            .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                        Chart(plotData.plotArray[selector].plotData) {
+                            if plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines {
+                                LineMark(
+                                    x: .value("Position", $0.xVal),
+                                    y: .value("Height", $0.yVal)
+                                )
+                                .foregroundStyle(plotData.plotArray[selector].changingPlotParameters.lineColor)
+                            }
+                            PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
+                                .symbolSize(1)
+                                .foregroundStyle(plotData.plotArray[selector].changingPlotParameters.lineColor)
                         }
-                        .chartXScale(domain: minX...maxX)
+                                                .chartXScale(domain: Double(minX)!...Double(maxX)!)
                         .chartYScale(domain: [
                             plotData.plotArray[selector].changingPlotParameters.yMin,
                             plotData.plotArray[selector].changingPlotParameters.yMax
@@ -61,19 +58,21 @@ struct ContentView: View {
 
             Divider()
             
-            
-            //Sliders for changing the values of the x-min and x-max to simulate "zooming in" visually.
-
+            // TextFields for changing the values of the x-min and x-max to simulate "zooming in" visually.
             HStack {
                 Text("Min µ:")
-                Slider(value: $minX, in: 1.0...maxX)
-                Text("\(minX, specifier: "%.2f")")
+                TextField("Enter min µ", text: $minX)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+               
+             
             }.padding()
 
             HStack {
                 Text("Max µ:")
-                Slider(value: $maxX, in: minX...4.0)
-                Text("\(maxX, specifier: "%.2f")")
+                TextField("Enter max µ", text: $maxX)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+          
+                
             }.padding()
 
             Button("Plot Logistic Map Bifurcation") {
@@ -91,7 +90,10 @@ struct ContentView: View {
     }
     
     @MainActor func setupPlotDataModel() {
+        guard let minXValue = Double(minX), let maxXValue = Double(maxX) else { return }
         calculator.plotDataModel = plotData.plotArray[selector]
+        calculator.plotDataModel?.changingPlotParameters.xMin = minXValue
+        calculator.plotDataModel?.changingPlotParameters.xMax = maxXValue
     }
 }
 
@@ -101,3 +103,4 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(PlotClass())
     }
 }
+
