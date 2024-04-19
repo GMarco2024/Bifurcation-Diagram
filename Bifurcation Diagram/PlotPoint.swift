@@ -2,7 +2,7 @@
 //  PlotPoint.swift
 //  Bifurcation Diagram
 //
-//  Created by PHYS 440 Marco on 4/19/24.
+//  Created by Marco on 4/19/24.
 //
 
 // PlotPoint.swift
