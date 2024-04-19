@@ -60,6 +60,9 @@ struct ContentView: View {
             .padding()
 
             Divider()
+            
+            
+            //Sliders for changing the values of the x-min and x-max to simulate "zooming in" visually.
 
             HStack {
                 Text("Min µ:")
@@ -88,7 +91,7 @@ struct ContentView: View {
     }
     
     @MainActor func setupPlotDataModel() {
-        calculator.plotDataModel = plotData.plotArray[0]
+        calculator.plotDataModel = plotData.plotArray[selector]
     }
 }
 
