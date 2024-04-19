@@ -65,38 +65,35 @@ import Observation
     //Total steps in which are looped.
         let totalSteps = 1000
         let step = (maxR - minR) / Double(totalSteps)
-        var plotData: [(x: Double, y: Double)] = []
-        var theText = "µ, X^*"
-        
-        //mu loop. In this case, mu is r.
+        var modifiedPlotData: Set<PlotPoint> = []
+
         for r in stride(from: minR, through: maxR, by: step) {
-            
-            
-       //Arbituary Seed
             var y = 0.5
-            
-       //Transients
             for _ in 1...200 {
                 y = r * y * (1 - y)
             }
-            
             for _ in 201...401 {
                 y = r * y * (1 - y)
-                
-    // We let decimalR and decimalY be the modifications for the lited text in which the values are set to 4 decimal places.
-                
                 let decimalR = Double(round(10000 * r) / 10000)
                 let decimalY = Double(round(10000 * y) / 10000)
-                plotData.append((x: decimalR, y: decimalY))
-                theText += "\(decimalR), \(decimalY)\n"
-                
+                modifiedPlotData.insert(PlotPoint(x: decimalR, y: decimalY))
             }
         }
 
-        //Append the data to be plotted of course.
-        await appendDataToPlot(plotData: plotData)
+        // Convert the set of unique plot points into an array and sort it
+        let sortedPlotData = Array(modifiedPlotData).sorted { $0.x < $1.x }
+
+        // Build the text representation from the sorted data
+        var theText = "µ, X^*\n"
+        for point in sortedPlotData {
+            theText += "\(point.x), \(point.y)\n"
+        }
+
+        // Asynchronously append the data points to the plot, mapping from PlotPoint to tuple
+        await appendDataToPlot(plotData: sortedPlotData.map { ($0.x, $0.y) })
         await updateCalculatedTextOnMainThread(theText: theText)
     }
+
 
     /// Resets the Calculated Text to ""
         @MainActor func resetCalculatedTextOnMainThread() {

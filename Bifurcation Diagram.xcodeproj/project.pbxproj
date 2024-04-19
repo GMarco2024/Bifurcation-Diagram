@@ -22,6 +22,7 @@
 		33B6111C2BC5E0CA003DC930 /* PlotDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6111B2BC5E0CA003DC930 /* PlotDataClass.swift */; };
 		33B6111E2BC5E0D4003DC930 /* PlotClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6111D2BC5E0D4003DC930 /* PlotClass.swift */; };
 		33B611202BC5E0E6003DC930 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6111F2BC5E0E6003DC930 /* Operators.swift */; };
+		90D13E412BD2D4CB0049348C /* PlotPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D13E402BD2D4CB0049348C /* PlotPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		33B6111B2BC5E0CA003DC930 /* PlotDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotDataClass.swift; sourceTree = "<group>"; };
 		33B6111D2BC5E0D4003DC930 /* PlotClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotClass.swift; sourceTree = "<group>"; };
 		33B6111F2BC5E0E6003DC930 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		90D13E402BD2D4CB0049348C /* PlotPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				33B6111F2BC5E0E6003DC930 /* Operators.swift */,
 				334827BF2BD05661006864D5 /* TextView.swift */,
 				334827C12BD0567C006864D5 /* TextExportDocument.swift */,
+				90D13E402BD2D4CB0049348C /* PlotPoint.swift */,
 				33B610EC2BC5E039003DC930 /* Assets.xcassets */,
 				33B610EE2BC5E039003DC930 /* Bifurcation_Diagram.entitlements */,
 				33B610EF2BC5E039003DC930 /* Preview Content */,
@@ -285,6 +288,7 @@
 			files = (
 				33B610EB2BC5E037003DC930 /* ContentView.swift in Sources */,
 				33B611202BC5E0E6003DC930 /* Operators.swift in Sources */,
+				90D13E412BD2D4CB0049348C /* PlotPoint.swift in Sources */,
 				33B6111E2BC5E0D4003DC930 /* PlotClass.swift in Sources */,
 				33B6111C2BC5E0CA003DC930 /* PlotDataClass.swift in Sources */,
 				33B611162BC5E091003DC930 /* ChangingPlotParameters.swift in Sources */,
