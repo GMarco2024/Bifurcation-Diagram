@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 
 struct TextView: View {
     
-    @Environment(PlotClass.self) var plotData
+    @EnvironmentObject var plotData: PlotClass
     
     @State var document: TextExportDocument = TextExportDocument(message: "")
     @State private var isImporting: Bool = false
@@ -22,11 +22,10 @@ struct TextView: View {
     @State var textSelector = 0
     
     var body: some View {
-        
-        @Bindable var plotData = plotData
-        
-        VStack{
-            TextEditor(text: $plotData.plotArray[textSelector].calculatedText )
+        VStack {
+            TextEditor(text: $plotData.plotArray[textSelector].calculatedText)
+            
+            
             
             
             
@@ -40,21 +39,22 @@ struct TextView: View {
             do {
                 guard let selectedFile: URL = try result.get().first else { return }
                 
-                //trying to get access to url contents
-                if (CFURLStartAccessingSecurityScopedResource(selectedFile as CFURL)) {
-                    
-                    
-                    
-                    guard let message = String(data: try Data(contentsOf: selectedFile), encoding: .utf8) else { return }
-                    
+                // Trying to get access to URL contents
+                if CFURLStartAccessingSecurityScopedResource(selectedFile as CFURL) 
+                
+                
+                
+                
+                {
+                    guard let message = String(data: try Data(contentsOf: selectedFile), encoding: .utf8) else {return }
                     document.message = message
-                    
                     plotData.plotArray[0].calculatedText = message
                     
-                    //done accessing the url
+                    
+                    
+                    // Done accessing the URL
                     CFURLStopAccessingSecurityScopedResource(selectedFile as CFURL)
-                }
-                else {
+                } else {
                     print("Permission error!")
                 }
             } catch {
@@ -77,7 +77,9 @@ struct TextView: View {
     }
 }
 
-#Preview {
-    TextView()
+struct TextView_Previews: PreviewProvider {
+    static var previews: some View {
+        TextView()
+        .environmentObject(PlotClass())
+    }
 }
-

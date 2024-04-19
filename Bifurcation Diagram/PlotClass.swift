@@ -8,15 +8,14 @@
 
 
 import Foundation
-import Observation
+import SwiftUI
 
-@Observable class PlotClass {
+class PlotClass: ObservableObject {
     
-    var plotArray = [PlotDataClass.init(fromLine: true)]
-    
+    @Published var plotArray: [PlotDataClass]
+
     init() {
-        self.plotArray = [PlotDataClass.init(fromLine: true)]
-        self.plotArray.append(contentsOf: [PlotDataClass.init(fromLine: true)])
-            
-        }
+        let initialPlot = PlotDataClass(fromLine: true)
+        self.plotArray = [initialPlot, initialPlot]
+    }
 }
