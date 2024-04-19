@@ -98,7 +98,7 @@ struct ContentView: View {
   
             taskGroup.addTask {
                 
-                //Calculate the new plotting data and place in the plotDataModel
+        
                 await calculator.plotLogisticMapBifurcation()
                 
             }

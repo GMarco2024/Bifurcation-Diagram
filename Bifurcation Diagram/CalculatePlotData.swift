@@ -57,20 +57,29 @@ import Observation
     }
     
   
-    
+    //This function is of the bifurcation diagram. Modified from the Java code form Chapter 12 on Chaos.
     func plotLogisticMapBifurcation() async {
         let minR = 1.0
         let maxR = 4.0
+        
+    //Total steps in which are looped.
         let totalSteps = 1000
         let step = (maxR - minR) / Double(totalSteps)
         var plotData: [(x: Double, y: Double)] = []
         var theText = "µ, X^*"
-
+        
+        //mu loop. In this case, mu is r.
         for r in stride(from: minR, through: maxR, by: step) {
+            
+            
+       //Arbituary Seed
             var y = 0.5
+            
+       //Transients
             for _ in 1...200 {
                 y = r * y * (1 - y)
             }
+            
             for _ in 201...401 {
                 y = r * y * (1 - y)
                 
@@ -84,14 +93,11 @@ import Observation
             }
         }
 
-       
-
+        //Append the data to be plotted of course.
         await appendDataToPlot(plotData: plotData)
         await updateCalculatedTextOnMainThread(theText: theText)
     }
 
-    
-    
     /// Resets the Calculated Text to ""
         @MainActor func resetCalculatedTextOnMainThread() {
             //Print Header
