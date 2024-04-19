@@ -67,20 +67,33 @@ import Observation
         let step = (maxR - minR) / Double(totalSteps)
         var modifiedPlotData: Set<PlotPoint> = []
 
+        //mu loop. In this case, mu is r.
         for r in stride(from: minR, through: maxR, by: step) {
+            
+        //Arbituary Seed
             var y = 0.5
+            
+        //Transients. We skip the first 200 and then continue with 200 and onward.
             for _ in 1...200 {
                 y = r * y * (1 - y)
             }
             for _ in 201...401 {
                 y = r * y * (1 - y)
+                
+        // We let decimalR and decimalY be the modifications for the lited text in which the values are set to 4 decimal places.
+                
                 let decimalR = Double(round(10000 * r) / 10000)
                 let decimalY = Double(round(10000 * y) / 10000)
+                
+        //This modifies the PlotData in which we had by removing the duplicate x and y values.
+                
                 modifiedPlotData.insert(PlotPoint(x: decimalR, y: decimalY))
+                
             }
         }
 
-        // Convert the set of unique plot points into an array and sort it
+        // Converts the set of the modified plot points into an array.
+        
         let sortedPlotData = Array(modifiedPlotData).sorted { $0.x < $1.x }
 
         // Build the text representation from the sorted data
