@@ -1,0 +1,26 @@
+// Bugs.java: Bifurcation diagram for logistic map
+
+import java.io.∗;
+
+ public class Bugs {
+
+	static double m_min =0.0, m_max =4., step =0.01 ;   // Class variables
+
+ public static void main(String[] argv) throws IOException, FileNotFoundException {
+
+   double m, y;
+   int i;						    // Output data
+
+   PrintWriter w = new PrintWriter(new FileOutputStream("Bugs.dat"), true);
+   For (m = m_min; m <= m_max; m += step) {		    
+		y= 0.5;					    // Arbitrary seed
+   For (i=1; I <=200; i++ ) y = m*y*(1-y);                     // Transients
+   For (I=201; I<=401; i++ ) {
+   y=m*y*(1-y);
+   w.println( ""+ m+" "+ y);}
+
+}
+
+System.out.println("sorted data stored in Bugs.dat);
+
+}}
