@@ -31,6 +31,7 @@ import Observation
     /// Displays a Blank Chart
     @MainActor func plotBlank()
     {
+   
         zeroData()
         
         //set the Plot Parameters
