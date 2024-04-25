@@ -84,8 +84,7 @@ struct ContentView: View {
         }
     }
 
-    /// calculate2
-    /// Function for calculating the exp(-x) plot
+
    
 }
 

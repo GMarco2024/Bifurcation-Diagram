@@ -85,6 +85,7 @@ import SwiftUI
         }
         await appendDataToPlot(plotData: sortedPlotData.map { ($0.x, $0.y) })
         await updateCalculatedTextOnMainThread(theText: theText)
+        
     }
 
 
