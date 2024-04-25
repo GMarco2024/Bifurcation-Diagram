@@ -87,41 +87,7 @@ import SwiftUI
         await updateCalculatedTextOnMainThread(theText: theText)
     }
 
-    // New plotting function for y = exp(-x)
-    func feigenbuamPrinciplePlot() async {
-        await resetCalculatedTextOnMainThread()
-        
-        // Check if plotDataModel is not nil and then clear data
-        await MainActor.run {
-            plotDataModel?.zeroData()  // Clear existing data
-        }
-        
-        let minR = 1.0
-        let maxR = 4.0
-        let totalSteps = 1000
-        let step = (maxR - minR) / Double(totalSteps)
-        var modifiedPlotData: Set<PlotPoint> = []
-        
-        for r in stride(from: minR, through: maxR, by: step) {
-            var y = 0.5
-            for _ in 1...200 {
-                y = r * y * (1 - y)
-            }
-            for _ in 201...401 {
-                y = r * y * (1 - y)
-                let decimalR = Double(round(10000 * r) / 10000)
-                let decimalY = Double(round(10000 * y) / 10000)
-                modifiedPlotData.insert(PlotPoint(x: decimalR, y: decimalY))
-            }
-        }
-        let sortedPlotData = Array(modifiedPlotData).sorted { $0.x < $1.x }
-        var theText = "µ, X^*\n"
-        for point in sortedPlotData {
-            theText += "\(point.x), \(point.y)\n"
-        }
-        await appendDataToPlot(plotData: sortedPlotData.map { ($0.x, $0.y) })
-        await updateCalculatedTextOnMainThread(theText: theText)
-    }
+
 
     /// Resets the Calculated Text to ""
     @MainActor func resetCalculatedTextOnMainThread() {

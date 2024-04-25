@@ -61,12 +61,7 @@ struct ContentView: View {
                 })
                 .padding()
 
-                Button("FeigenbaumPrinciple Plot", action: {
-                    Task.init {
-                        self.selector = 1
-                        await self.calculate2()
-                    }
-                })
+  
                 .padding()
             }
         }
@@ -91,16 +86,7 @@ struct ContentView: View {
 
     /// calculate2
     /// Function for calculating the exp(-x) plot
-    func calculate2() async {
-        // pass the plotDataModel to the Calculator
-        await setupPlotDataModel(selector: 1)
-        let _ = await withTaskGroup(of: Void.self) { taskGroup in
-            taskGroup.addTask {
-                // Calculate the new plotting data for exp(-x)
-                await calculator.feigenbuamPrinciplePlot()
-            }
-        }
-    }
+   
 }
 
 struct ContentView_Previews: PreviewProvider {

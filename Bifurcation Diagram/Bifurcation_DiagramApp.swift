@@ -11,7 +11,7 @@ import Observation
 @main
 struct Bifurcation_DiagramApp: App {
     
-    // I had to create this instance for PlotClass that will be passed around using EnvironmentObject
+    // I had to create this instance for PlotClass that will be passed as EnvironmentObject
     var plotData = PlotClass()
 
     var body: some Scene {
