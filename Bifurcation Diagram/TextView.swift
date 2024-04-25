@@ -12,28 +12,37 @@ struct TextView: View {
     @State var textSelector = 0
     
     // Existing Text Editor dimensions
-    @State private var width: CGFloat = 350
+    @State private var width: CGFloat = 150
     @State private var height: CGFloat = 500
     
     // New Text Editor dimensions
-    @State private var secondTextWidth: CGFloat = 300
+    @State private var secondTextWidth: CGFloat = 150
     @State private var secondTextHeight: CGFloat = 500
     
     var body: some View {
         HStack(spacing: 20) {
-            TextEditor(text: $plotData.plotArray[textSelector].calculatedText)
-                .frame(width: width)
-                .border(Color.gray, width: 1)
-
+            VStack {
+                Text("Bifurcation Points")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                TextEditor(text: $plotData.plotArray[textSelector].calculatedText)
+                    .frame(width: width, height: height)
+                    .border(Color.gray, width: 1)
+            }
+            
             // Arrow Label
             Text("➔")
                 .font(.largeTitle)
                 .foregroundColor(.gray)
 
-            // Second Text Editor (Test)
-            TextEditor(text: $plotData.plotArray[textSelector].calculatedText)
-                .frame(width: secondTextWidth)
-                .border(Color.blue, width: 1)
+            VStack {
+                Text("Feigenbaum Constants")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                TextEditor(text: $plotData.plotArray[textSelector].calculatedText)
+                    .frame(width: secondTextWidth, height: secondTextHeight)
+                    .border(Color.gray, width: 1)
+            }
         }
         .padding()
         .fileImporter(isPresented: $isImporting, allowedContentTypes: [UTType.plainText], allowsMultipleSelection: false) { result in

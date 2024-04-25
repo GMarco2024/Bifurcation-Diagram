@@ -55,9 +55,9 @@ import SwiftUI
     func plotLogisticMapBifurcation() async {
         await resetCalculatedTextOnMainThread()
         
-        // Check if plotDataModel is not nil and then clear data
+      
         await MainActor.run {
-            plotDataModel?.zeroData()  // Clear existing data
+            plotDataModel?.zeroData()
         }
         
         let minR = 1.0
