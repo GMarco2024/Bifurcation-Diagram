@@ -25,7 +25,7 @@ struct Bifurcation_DiagramApp: App {
                 TextView()
                     .environmentObject(plotData)
                     .tabItem {
-                        Label("Text", systemImage: "text.alignleft")
+                        Label("Plot Points", systemImage: "text.alignleft")
                 }
             }
         }
