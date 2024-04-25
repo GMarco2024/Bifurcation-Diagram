@@ -83,21 +83,56 @@ import SwiftUI
         for point in sortedPlotData {
             theText += "\(point.x), \(point.y)\n"
         }
-        await appendDataToPlot(plotData: sortedPlotData.map { ($0.x, $0.y) })
-        await updateCalculatedTextOnMainThread(theText: theText)
-        
-    }
+                await appendDataToPlot(plotData: sortedPlotData.map { ($0.x, $0.y) })
+                await updateCalculatedTextOnMainThread(theText: theText)
+            }
 
+            /// Resets the Calculated Text to ""
+            @MainActor func resetCalculatedTextOnMainThread() {
+                plotDataModel!.calculatedText = ""
+            }
 
+            /// Adds the passed text to the display in the main window
+            /// - Parameter theText: Text Passed To Add To Display
+            @MainActor func updateCalculatedTextOnMainThread(theText: String) {
+                plotDataModel!.calculatedText += theText
+            }
 
-    /// Resets the Calculated Text to ""
-    @MainActor func resetCalculatedTextOnMainThread() {
-        plotDataModel!.calculatedText = ""
-    }
-    
-    /// Adds the passed text to the display in the main window
-    /// - Parameter theText: Text Passed To Add To Display
-    @MainActor func updateCalculatedTextOnMainThread(theText: String) {
-        plotDataModel!.calculatedText += theText
-    }
-}
+            /// Calculate Feigenbaum's constant delta
+            /// - Returns: Approximation of Feigenbaum's delta constant
+            func feigenbaumConstantCalculate() async -> Double {
+                let bifurcationPoints = await fetchBifurcationPoints()
+                guard bifurcationPoints.count >= 4 else {
+                    print("Not enough bifurcation points to calculate Feigenbaum's constant.")
+                    return 0
+                }
+
+                var deltas = [Double]()
+                for i in 2..<(bifurcationPoints.count - 1) {
+                    let ratio = (bifurcationPoints[i] - bifurcationPoints[i - 1]) / (bifurcationPoints[i + 1] - bifurcationPoints[i])
+                    deltas.append(ratio)
+                }
+
+                // Compute the average delta for better stability in the results
+                let averageDelta = deltas.reduce(0, +) / Double(deltas.count)
+                await MainActor.run {
+                    updateCalculatedTextOnMainThread(theText: "Calculated Feigenbaum's delta: \(averageDelta)")
+                }
+                return averageDelta
+            }
+
+            /// Fetch bifurcation points from the model
+            /// - Returns: An array of growth rate values where bifurcations occur
+            private func fetchBifurcationPoints() async -> [Double] {
+                await MainActor.run {
+                    return plotDataModel?.plotData.compactMap { $0.xVal }.unique() ?? []
+                }
+            }
+        }
+
+        extension Array where Element: Hashable {
+            func unique() -> [Element] {
+                var seen: Set<Element> = []
+                return filter { seen.insert($0).inserted }
+            }
+        }

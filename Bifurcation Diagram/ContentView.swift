@@ -63,34 +63,39 @@ struct ContentView: View {
 
   
                 .padding()
-            }
-        }
-    }
-    
-    @MainActor func setupPlotDataModel(selector: Int) {
-        calculator.plotDataModel = self.plotData.plotArray[selector]
-    }
-    
-    /// calculate
-    /// Function accepts the command to start the calculation from the GUI
-    func calculate() async {
-        // pass the plotDataModel to the Calculator
-        await setupPlotDataModel(selector: 0)
-        let _ = await withTaskGroup(of: Void.self) { taskGroup in
-            taskGroup.addTask {
-                // Calculate the new plotting data and place in the plotDataModel
-                await calculator.plotLogisticMapBifurcation()
-            }
-        }
-    }
+                                
+                                Button("Calculate Feigenbaum Constant", action: {
+                                    Task {
+                                        let delta = await calculator.feigenbaumConstantCalculate()
+                                        print("Feigenbaum constant delta: \(delta)")
+                                    }
+                                })
+                                .padding()
+                            }
+                        }
+                    }
+                    
+                    @MainActor func setupPlotDataModel(selector: Int) {
+                        calculator.plotDataModel = self.plotData.plotArray[selector]
+                    }
+                    
+                    /// calculate
+                    /// Function accepts the command to start the calculation from the GUI
+                    func calculate() async {
+                        // pass the plotDataModel to the Calculator
+                        await setupPlotDataModel(selector: 0)
+                        let _ = await withTaskGroup(of: Void.self) { taskGroup in
+                            taskGroup.addTask {
+                                // Calculate the new plotting data and place in the plotDataModel
+                                await calculator.plotLogisticMapBifurcation()
+                            }
+                        }
+                    }
+                }
 
-
-   
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-        .environmentObject(PlotClass())
-    }
-}
+                struct ContentView_Previews: PreviewProvider {
+                    static var previews: some View {
+                        ContentView()
+                        .environmentObject(PlotClass())
+                    }
+                }
