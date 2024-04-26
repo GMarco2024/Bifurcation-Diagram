@@ -77,12 +77,12 @@ struct ContentView: View {
                 .padding()
             }
 
-            Text("Lyapunov Coefficients for Logistic Map")
+            Text("Lyapunov Coefficients and Shannon Entropy")
                     .bold()
                     .font(.system(size: 15))
                     .underline()
             
-            Text("We now compute Lyapunox exponents for the bifurcation plot of the logistic map as a function of growth rate. ")
+            Text("We now compute Lyapunov exponents and Shannon entropy for the bifurcation plot of the logistic map as a function of growth rate. ")
                     .font(.system(size: 12))
             
         }
