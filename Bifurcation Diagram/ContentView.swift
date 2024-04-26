@@ -63,7 +63,7 @@ struct ContentView: View {
                 .padding()
             }
 
-            // Displaying the Feigenbaum constant directly in the GUI
+      
              
         }
     }
