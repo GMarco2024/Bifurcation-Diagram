@@ -24,14 +24,14 @@ import Observation
             
         }
         
-       }
+    }
     
     
     
     /// Displays a Blank Chart
     @MainActor func plotBlank()
     {
-   
+        
         zeroData()
         
         //set the Plot Parameters
@@ -51,29 +51,25 @@ import Observation
     
     /// Zeros Out The Data Being Plotted
     @MainActor func zeroData(){
-            
-            plotData = []
-            pointNumber = 1.0
-            
-        }
+        
+        plotData = []
+        pointNumber = 1.0
+        
+    }
     
     /// Append Data appends Data to the Plot. Increments the pointNumber for 1-D Data
     /// - Parameter dataPoint: Array of (x, y) data for plotting
     @MainActor func appendData(dataPoint: [(x: Double, y: Double)])
-        {
-          
-            for item in dataPoint{
-                
-                let dataValue :[PlotDataStruct] =  [.init(xVal: item.x, yVal: item.y)]
-                
-                plotData.append(contentsOf: dataValue)
-                pointNumber += 1.0
-                
-            }
+    {
+        
+        for item in dataPoint{
+            
+            let dataValue :[PlotDataStruct] =  [.init(xVal: item.x, yVal: item.y)]
+            
+            plotData.append(contentsOf: dataValue)
+            pointNumber += 1.0
             
         }
-    
-    
-
+    }
 }
 
