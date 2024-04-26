@@ -98,12 +98,22 @@ import SwiftUI
                 plotDataModel!.calculatedText += theText
             }
 
-            /// Calculate Feigenbaum's constant delta
-            /// - Returns: Approximation of Feigenbaum's delta constant
+    
+ //          Feigenbaum Constant
+ //
+ //            {x   -  x     }
+ //              n      n - 1
+ // [ delta  =  --------------- ]
+ //             {x       -  x }
+ //               n + 1      n
+    
+    /// Calculate Feigenbaum's constant delta
+    /// - Returns: Approximation of Feigenbaum's delta constant
+    
             func feigenbaumConstantCalculate() async -> Double {
                 let bifurcationPoints = await fetchBifurcationPoints()
                 guard bifurcationPoints.count >= 4 else {
-                    print("Not enough bifurcation points to calculate Feigenbaum's constant.")
+                    print("Please plot bifurcation map first.")
                     return 0
                 }
 
