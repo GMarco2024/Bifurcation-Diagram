@@ -68,10 +68,10 @@ import SwiftUI
         
         for r in stride(from: minR, through: maxR, by: step) {
             var y = 0.5
-            for _ in 1...200 {
+            for _ in 1...1000 {
                 y = r * y * (1 - y)
             }
-            for _ in 201...401 {
+            for _ in 1001...2000 {
                 y = r * y * (1 - y)
                 let decimalR = Double(round(10000 * r) / 10000)
                 let decimalY = Double(round(10000 * y) / 10000)
@@ -113,12 +113,7 @@ import SwiftUI
                     deltas.append(ratio)
                 }
 
-                // Compute the average delta for better stability in the results
-                let averageDelta = deltas.reduce(0, +) / Double(deltas.count)
-                await MainActor.run {
-                    updateCalculatedTextOnMainThread(theText: "Calculated Feigenbaum's delta: \(averageDelta)")
-                }
-                return averageDelta
+                return deltas.last ?? 0
             }
 
             /// Fetch bifurcation points from the model

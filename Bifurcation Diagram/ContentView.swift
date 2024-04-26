@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Charts Plot Observation
-//
-//  Created by Jeff_Terry on 1/15/24.
-//
-
 import SwiftUI
 import Charts
 
@@ -12,29 +5,29 @@ struct ContentView: View {
     @EnvironmentObject var plotData: PlotClass
     
     @State private var calculator = CalculatePlotData()
-    
-    @State var selector = 0
+    @State private var selector = 0
+    @State private var feigenbaumDelta: Double? = nil  // State to hold the Feigenbaum constant
     
     var body: some View {
         VStack {
             Group {
                 HStack(alignment: .center, spacing: 0) {
-                    Text($plotData.plotArray[selector].changingPlotParameters.yLabel.wrappedValue)
+                    Text(plotData.plotArray[selector].changingPlotParameters.yLabel)
                         .rotationEffect(Angle(degrees: -90))
                         .foregroundColor(.red)
                         .padding()
                     VStack {
-                        Chart($plotData.plotArray[selector].plotData.wrappedValue) {
-                            if ($plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines.wrappedValue) {
+                        Chart(plotData.plotArray[selector].plotData) { data in
+                            if plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines {
                                 LineMark(
-                                    x: .value("Position", $0.xVal),
-                                    y: .value("Height", $0.yVal)
+                                    x: .value("Position", data.xVal),
+                                    y: .value("Height", data.yVal)
                                 )
-                                .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                                .foregroundStyle(plotData.plotArray[selector].changingPlotParameters.lineColor)
                             }
-                            PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
+                            PointMark(x: .value("Position", data.xVal), y: .value("Height", data.yVal))
                                 .symbolSize(1)
-                                .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                                .foregroundStyle(plotData.plotArray[selector].changingPlotParameters.lineColor)
                         }
                         .chartYScale(domain: [plotData.plotArray[selector].changingPlotParameters.yMin, plotData.plotArray[selector].changingPlotParameters.yMax])
                         .chartXScale(domain: [plotData.plotArray[selector].changingPlotParameters.xMin, plotData.plotArray[selector].changingPlotParameters.xMax])
@@ -42,7 +35,7 @@ struct ContentView: View {
                             AxisMarks(position: .leading)
                         }
                         .padding()
-                        Text($plotData.plotArray[selector].changingPlotParameters.xLabel.wrappedValue)
+                        Text(plotData.plotArray[selector].changingPlotParameters.xLabel)
                             .foregroundColor(.red)
                     }
                 }
@@ -51,7 +44,7 @@ struct ContentView: View {
             .padding()
             
             Divider()
-            
+
             HStack {
                 Button("Plot Logistic Map Bifurcation", action: {
                     Task.init {
@@ -61,41 +54,42 @@ struct ContentView: View {
                 })
                 .padding()
 
-  
+                Button("Calculate Feigenbaum Constant", action: {
+                    Task {
+                        feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
+                    }
+                })
                 .padding()
-                                
-                                Button("Calculate Feigenbaum Constant", action: {
-                                    Task {
-                                        let delta = await calculator.feigenbaumConstantCalculate()
-                                        print("Feigenbaum constant delta: \(delta)")
-                                    }
-                                })
-                                .padding()
-                            }
-                        }
-                    }
-                    
-                    @MainActor func setupPlotDataModel(selector: Int) {
-                        calculator.plotDataModel = self.plotData.plotArray[selector]
-                    }
-                    
-                    /// calculate
-                    /// Function accepts the command to start the calculation from the GUI
-                    func calculate() async {
-                        // pass the plotDataModel to the Calculator
-                        await setupPlotDataModel(selector: 0)
-                        let _ = await withTaskGroup(of: Void.self) { taskGroup in
-                            taskGroup.addTask {
-                                // Calculate the new plotting data and place in the plotDataModel
-                                await calculator.plotLogisticMapBifurcation()
-                            }
-                        }
-                    }
-                }
+            }
 
-                struct ContentView_Previews: PreviewProvider {
-                    static var previews: some View {
-                        ContentView()
-                        .environmentObject(PlotClass())
-                    }
-                }
+            // Displaying the Feigenbaum constant directly in the GUI
+              if let delta = feigenbaumDelta {
+               Text("Feigenbaum constant delta: \(delta)")
+                  .font(.headline)
+                    .padding()
+            } else {
+                Text("Feigenbaum constant will appear here.")
+                    .foregroundColor(.gray)
+                    .padding()
+            }
+        }
+    }
+    
+    @MainActor func setupPlotDataModel(selector: Int) {
+        calculator.plotDataModel = self.plotData.plotArray[selector]
+    }
+    
+    /// calculate
+    /// Function accepts the command to start the calculation from the GUI
+    func calculate() async {
+        // pass the plotDataModel to the Calculator
+        await setupPlotDataModel(selector: 0)
+        await calculator.plotLogisticMapBifurcation()
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView().environmentObject(PlotClass())
+    }
+}
