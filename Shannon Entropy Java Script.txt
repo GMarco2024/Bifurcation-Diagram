@@ -1,0 +1,37 @@
+// Entropy.java, Shannon entropy of logistic map
+import java.io.*;
+import java.util.*;
+
+public class Entropy {
+
+    public static void main(String[] argv) throws IOException, FileNotFoundException {
+
+        PrintWriter w = new PrintWriter (new FileOutputStream("Entropy.dat"), true);
+
+        double prob[] = new double[1001];             // Probabilities
+
+        int nbin = 1000, nmax = 100000, j, n, ibin;
+
+        double entropy, x, mu;
+
+        System.out.println("Entropy output in Entropy.dat");
+
+        for (mu = 3.5; mu <= 4; mu = mu + 0.001) {      // Values of mu
+            for (j = 1; j < nbin; j++) prob[j] = 0;
+
+            x = 0.5;
+            for (n = 1; n <= nmax; n++) {
+            x = mu * x * (1. - x);                  // Logistic map, Skip transients
+               
+
+            if (n > 30000) { ibin = (int)(x * nbin) + 1; prob[ibin] = prob[ibin] + 1;}
+            
+}
+
+            entropy = 0.;
+            for ( ibin = 1; ibin <= nbin; ibin++ ) if (prob[ibin] > 0)
+                  entropy = entropy - (prob[ibin]/nmax) * Math.log(prob[ibin]/nmax);
+            w.println(" " + mu + " " + entropy);
+        }
+    }
+}

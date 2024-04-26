@@ -77,12 +77,12 @@ struct ContentView: View {
                 .padding()
             }
 
-            Text("Random Numbers via Logistic Plot")
+            Text("Lyapunov Coefficients for Logistic Map")
                     .bold()
                     .font(.system(size: 15))
                     .underline()
             
-            Text("We now implement random number tests for the logistic plot. ")
+            Text("We now compute Lyapunox exponents for the bifurcation plot of the logistic map as a function of growth rate. ")
                     .font(.system(size: 12))
             
         }

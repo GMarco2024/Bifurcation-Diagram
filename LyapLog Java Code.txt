@@ -14,7 +14,7 @@ public class LyapLog {
             y = 0.5;
             for (i = 1; i <= 200; i++) y = m*y*(1-y);                     // Skip transients
             suma = 0.;
-            for (i = 201; i <= 401; i++) {.                              
+            for (i = 201; i <= 401; i++) {                              
                 y = m*y*(1-y);
                 suma = suma + Math.log(Math.abs(m*(1 - 2.*y)));           // Lyapunov
                 w.println(m + " " + y);
