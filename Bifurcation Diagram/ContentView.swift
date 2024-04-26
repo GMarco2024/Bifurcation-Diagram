@@ -14,11 +14,17 @@ struct ContentView: View {
     
     @State private var calculator = CalculatePlotData()
     @State private var selector = 0
-    @State private var feigenbaumDelta: Double? = nil  // State to hold the Feigenbaum constant
+    @State private var feigenbaumDelta: Double? = nil
     
     var body: some View {
         VStack {
             Group {
+                
+                Text("Bifurcation Diagram")
+                        .font(.title)
+                        .bold()
+                        .underline()
+                
                 HStack(alignment: .center, spacing: 0) {
                     Text(plotData.plotArray[selector].changingPlotParameters.yLabel)
                         .rotationEffect(Angle(degrees: -90))
@@ -71,8 +77,14 @@ struct ContentView: View {
                 .padding()
             }
 
-      
-             
+            Text("Random Numbers via Logistic Plot")
+                    .bold()
+                    .font(.system(size: 15))
+                    .underline()
+            
+            Text("We now implement random number tests for the logistic plot. ")
+                    .font(.system(size: 12))
+            
         }
     }
     

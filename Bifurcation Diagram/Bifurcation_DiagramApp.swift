@@ -20,12 +20,12 @@ struct Bifurcation_DiagramApp: App {
                 ContentView()
                     .environmentObject(plotData)
                     .tabItem {
-                        Label("Plot", systemImage: "chart.xyaxis.line")
+                        Label("Bifurcation Plot", systemImage: "chart.xyaxis.line")
                     }
                 TextView()
                     .environmentObject(plotData)
                     .tabItem {
-                        Label("Plot Points", systemImage: "text.alignleft")
+                        Label("Bifurcation Plot Points", systemImage: "text.alignleft")
                 }
             }
         }

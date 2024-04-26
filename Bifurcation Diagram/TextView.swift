@@ -41,9 +41,16 @@ struct TextView: View {
             }
             
             // Arrow Label
-            Text("➔")
-                .font(.largeTitle)
-                .foregroundColor(.gray)
+            
+            VStack{
+                Text("➔")
+                    .font(.largeTitle)
+                    .foregroundColor(.gray)
+                
+                Button("Calculate Feigenbaum Constant") {
+                }
+                .buttonStyle(.bordered)
+            }
 
             VStack {
                 Text("Feigenbaum Constant")
