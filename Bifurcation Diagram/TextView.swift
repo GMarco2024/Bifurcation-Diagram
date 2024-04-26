@@ -8,6 +8,8 @@ struct TextView: View {
     @State private var isImporting: Bool = false
     @State private var isExporting: Bool = false
     
+    @State private var feigenbaumConstantPlaceholder: String = ""
+    
     @State var textSelectorString = "0"
     @State var textSelector = 0
     
@@ -17,7 +19,7 @@ struct TextView: View {
     
     // New Text Editor dimensions
     @State private var secondTextWidth: CGFloat = 150
-    @State private var secondTextHeight: CGFloat = 500
+    @State private var secondTextHeight: CGFloat = 50
     
     var body: some View {
         HStack(spacing: 20) {
@@ -36,13 +38,25 @@ struct TextView: View {
                 .foregroundColor(.gray)
 
             VStack {
-                Text("Feigenbaum Constants")
+                Text("Feigenbaum Constant")
                     .font(.headline)
                     .foregroundColor(.gray)
-                TextEditor(text: $plotData.plotArray[textSelector].calculatedText)
-                    .frame(width: secondTextWidth, height: secondTextHeight)
-                    .border(Color.gray, width: 1)
+                TextEditor(text: Binding(
+                    get: {
+                        if let feigenbaumConstant = plotData.feigenbaumConstant {
+                            return "\(feigenbaumConstant)"
+                        } else {
+                            return "Feigenbaum constant will appear here."
+                        }
+                    },
+                    set: { _ in }
+                ))
+                .frame(width: secondTextWidth, height: secondTextHeight)
+                .border(Color.gray, width: 1)
             }
+            
+           
+            
         }
         .padding()
         .fileImporter(isPresented: $isImporting, allowedContentTypes: [UTType.plainText], allowsMultipleSelection: false) { result in

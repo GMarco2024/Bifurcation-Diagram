@@ -13,6 +13,7 @@ import SwiftUI
 class PlotClass: ObservableObject {
     
     @Published var plotArray: [PlotDataClass]
+    @Published var feigenbaumConstant: Double?
 
     init() {
         let initialPlot = PlotDataClass(fromLine: true)

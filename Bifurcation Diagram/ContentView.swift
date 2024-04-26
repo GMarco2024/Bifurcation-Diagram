@@ -56,22 +56,15 @@ struct ContentView: View {
 
                 Button("Calculate Feigenbaum Constant", action: {
                     Task {
-                        feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
-                    }
+                            let feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
+                            plotData.feigenbaumConstant = feigenbaumDelta
+                        }
                 })
                 .padding()
             }
 
             // Displaying the Feigenbaum constant directly in the GUI
-              if let delta = feigenbaumDelta {
-               Text("Feigenbaum constant delta: \(delta)")
-                  .font(.headline)
-                    .padding()
-            } else {
-                Text("Feigenbaum constant will appear here.")
-                    .foregroundColor(.gray)
-                    .padding()
-            }
+             
         }
     }
     
