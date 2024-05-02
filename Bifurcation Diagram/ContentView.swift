@@ -21,9 +21,9 @@ struct ContentView: View {
             Group {
                 
                 Text("Bifurcation Diagram")
-                        .font(.title)
-                        .bold()
-                        .underline()
+                    .font(.title)
+                    .bold()
+                    .underline()
                 
                 HStack(alignment: .center, spacing: 0) {
                     Text(plotData.plotArray[selector].changingPlotParameters.yLabel)
@@ -58,7 +58,7 @@ struct ContentView: View {
             .padding()
             
             Divider()
-
+            
             HStack {
                 Button("Plot Logistic Map Bifurcation", action: {
                     Task.init {
@@ -67,24 +67,16 @@ struct ContentView: View {
                     }
                 })
                 .padding()
-
+                
                 Button("Calculate Feigenbaum Constant", action: {
                     Task {
-                            let feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
-                            plotData.feigenbaumConstant = feigenbaumDelta
-                        }
-                })
+                        let feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
+                        plotData.feigenbaumConstant = feigenbaumDelta
+                    }
+                }
+                )
                 .padding()
             }
-
-            Text("Lyapunov Coefficients and Shannon Entropy")
-                    .bold()
-                    .font(.system(size: 15))
-                    .underline()
-            
-            Text("We now compute Lyapunov exponents and Shannon entropy for the bifurcation plot of the logistic map as a function of growth rate. ")
-                    .font(.system(size: 12))
-            
         }
     }
     
