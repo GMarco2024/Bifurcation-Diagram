@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  Bifurcation Diagram
-//
-//  Created by Jeff_Terry on 1/15/24.
-//  Modified by Marco Gonzalez 2/11/24
-//
-
 import SwiftUI
 import Charts
 
@@ -14,7 +6,6 @@ struct ContentView: View {
     
     @State private var calculator = CalculatePlotData()
     @State private var selector = 0
-    @State private var feigenbaumDelta: Double? = nil
     
     var body: some View {
         VStack {
@@ -29,7 +20,7 @@ struct ContentView: View {
                     Text(plotData.plotArray[selector].changingPlotParameters.yLabel)
                         .rotationEffect(Angle(degrees: -90))
                         .foregroundColor(.red)
-                        .padding()
+             
                     VStack {
                         Chart(plotData.plotArray[selector].plotData) { data in
                             if plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines {
@@ -48,35 +39,21 @@ struct ContentView: View {
                         .chartYAxis {
                             AxisMarks(position: .leading)
                         }
-                        .padding()
+                       
                         Text(plotData.plotArray[selector].changingPlotParameters.xLabel)
                             .foregroundColor(.red)
                     }
                 }
                 .frame(alignment: .center)
             }
-            .padding()
+         
             
-            Divider()
-            
-            HStack {
-                Button("Plot Logistic Map Bifurcation", action: {
-                    Task.init {
-                        self.selector = 0
-                        await self.calculate()
-                    }
-                })
-                .padding()
-                
-                Button("Calculate Feigenbaum Constant", action: {
-                    Task {
-                        let feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
-                        plotData.feigenbaumConstant = feigenbaumDelta
-                    }
+            Button("Plot Logistic Map") {
+                Task {
+                    await logisticMapFeigenbaum()
                 }
-                )
-                .padding()
             }
+            .padding()
         }
     }
     
@@ -84,10 +61,17 @@ struct ContentView: View {
         calculator.plotDataModel = self.plotData.plotArray[selector]
     }
     
+    func logisticMapFeigenbaum() async {
+        self.selector = 0
+        await calculate()
+        let feigenbaumDelta = await calculator.feigenbaumConstantCalculate()
+        plotData.feigenbaumConstant = feigenbaumDelta
+    }
+    
     /// calculate
     /// Function accepts the command to start the calculation from the GUI
     func calculate() async {
-        // pass the plotDataModel to the Calculator
+        // Pass the plotDataModel to the Calculator
         await setupPlotDataModel(selector: 0)
         await calculator.plotLogisticMapBifurcation()
     }
