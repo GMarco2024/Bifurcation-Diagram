@@ -27,7 +27,7 @@ import SwiftUI
     ///   - yMin: Minimum value of y Axis
     ///   - yMax: Maximum value of y Axis
     @MainActor func setThePlotParameters(color: String, xLabel: String, yLabel: String, title: String, xMin: Double, xMax: Double, yMin: Double, yMax: Double) {
-        //set the Plot Parameters
+        // Set the plot parameters based on inputs.
         plotDataModel!.changingPlotParameters.yMax = yMax
         plotDataModel!.changingPlotParameters.yMin = yMin
         plotDataModel!.changingPlotParameters.xMax = xMax
@@ -35,6 +35,7 @@ import SwiftUI
         plotDataModel!.changingPlotParameters.xLabel = xLabel
         plotDataModel!.changingPlotParameters.yLabel = yLabel
         
+        // Adjust line color based on input.
         if color == "Red" {
             plotDataModel!.changingPlotParameters.lineColor = Color.red
         } else {
@@ -52,21 +53,31 @@ import SwiftUI
     }
     
     // This function calculates the bifurcation diagram. Modified from the Java code form Chapter 12 on Chaos.
+    
+   /// y represents the current value or state of the population.
+   /// r is a parameter representing the groth rate.
+   /// y-next is the next state of the population based on the current state and growth rate.
+   /// Equation
+   /// y            =  r times y times (1  -  y)
+   ///  next
+
     func plotLogisticMapBifurcation() async {
         await resetCalculatedTextOnMainThread()
-        
-      
         await MainActor.run {
             plotDataModel?.zeroData()
         }
         
+        // Set parameters for the bifurcation diagram range and resolution.
         let minR = 1.0
         let maxR = 4.0
         let totalSteps = 1000
         let step = (maxR - minR) / Double(totalSteps)
         var modifiedPlotData: Set<PlotPoint> = []
         
+        // Calculate points for the bifurcation diagram.
         for r in stride(from: minR, through: maxR, by: step) {
+          
+        // Initial condition for each r value.
             var y = 0.5
             for _ in 1...1000 {
                 y = r * y * (1 - y)
@@ -117,6 +128,7 @@ import SwiftUI
                     return 0
                 }
 
+        // Calculate Feigenbaum's delta using ratios of intervals between bifurcations.
                 var deltas = [Double]()
                 for i in 2..<(bifurcationPoints.count - 1) {
                     let ratio = (bifurcationPoints[i] - bifurcationPoints[i - 1]) / (bifurcationPoints[i + 1] - bifurcationPoints[i])
@@ -135,6 +147,7 @@ import SwiftUI
             }
         }
 
+// Extension to provide a method for finding unique elements in an array.
         extension Array where Element: Hashable {
             func unique() -> [Element] {
                 var seen: Set<Element> = []

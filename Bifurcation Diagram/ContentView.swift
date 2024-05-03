@@ -49,8 +49,7 @@ struct ContentView: View {
                 .frame(alignment: .center)
             }
          
-            //We have a button for plotting the logistic map
-            
+            // Button to trigger the logistic map plotting and calculation of the Feigenbaum constant.
             Button("Plot Logistic Map") {
                 Task {
                     await logisticMapFeigenbaum()
@@ -64,6 +63,7 @@ struct ContentView: View {
         calculator.plotDataModel = self.plotData.plotArray[selector]
     }
     
+    // Function to handle the full logistic map plotting and Feigenbaum calculation process.
     func logisticMapFeigenbaum() async {
         self.selector = 0
         await calculate()
@@ -73,9 +73,11 @@ struct ContentView: View {
     
     /// calculate
     /// Function accepts the command to start the calculation from the GUI
+    /// Starts the bifurcation plotting process.
     func calculate() async {
         // Pass the plotDataModel to the Calculator
         await setupPlotDataModel(selector: 0)
+        // Command the calculator to plot the logistic map bifurcation.
         await calculator.plotLogisticMapBifurcation()
     }
 }
