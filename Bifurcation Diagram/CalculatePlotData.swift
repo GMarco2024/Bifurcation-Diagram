@@ -27,7 +27,7 @@ import SwiftUI
     ///   - yMin: Minimum value of y Axis
     ///   - yMax: Maximum value of y Axis
     @MainActor func setThePlotParameters(color: String, xLabel: String, yLabel: String, title: String, xMin: Double, xMax: Double, yMin: Double, yMax: Double) {
-        // Set the plot parameters based on inputs.
+     
         plotDataModel!.changingPlotParameters.yMax = yMax
         plotDataModel!.changingPlotParameters.yMin = yMin
         plotDataModel!.changingPlotParameters.xMax = xMax
