@@ -16,11 +16,13 @@ struct ContentView: View {
                     .bold()
                     .underline()
                 
+                // Rotates the Y-axis label by -90 degrees.
                 HStack(alignment: .center, spacing: 0) {
                     Text(plotData.plotArray[selector].changingPlotParameters.yLabel)
                         .rotationEffect(Angle(degrees: -90))
                         .foregroundColor(.red)
              
+                // Renders a chart with line marks using the plot data.
                     VStack {
                         Chart(plotData.plotArray[selector].plotData) { data in
                             if plotData.plotArray[selector].changingPlotParameters.shouldIPlotPointLines {
@@ -39,7 +41,7 @@ struct ContentView: View {
                         .chartYAxis {
                             AxisMarks(position: .leading)
                         }
-                       
+                        // Displays the X-axis label.
                         Text(plotData.plotArray[selector].changingPlotParameters.xLabel)
                             .foregroundColor(.red)
                     }

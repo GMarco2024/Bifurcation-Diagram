@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		334827C02BD05661006864D5 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334827BF2BD05661006864D5 /* TextView.swift */; };
-		334827C22BD0567C006864D5 /* TextExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334827C12BD0567C006864D5 /* TextExportDocument.swift */; };
 		33B610E92BC5E037003DC930 /* Bifurcation_DiagramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B610E82BC5E037003DC930 /* Bifurcation_DiagramApp.swift */; };
 		33B610EB2BC5E037003DC930 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B610EA2BC5E037003DC930 /* ContentView.swift */; };
 		33B610ED2BC5E039003DC930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33B610EC2BC5E039003DC930 /* Assets.xcassets */; };
@@ -21,7 +20,6 @@
 		33B611182BC5E0A3003DC930 /* PlotDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B611172BC5E0A3003DC930 /* PlotDataStruct.swift */; };
 		33B6111C2BC5E0CA003DC930 /* PlotDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6111B2BC5E0CA003DC930 /* PlotDataClass.swift */; };
 		33B6111E2BC5E0D4003DC930 /* PlotClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6111D2BC5E0D4003DC930 /* PlotClass.swift */; };
-		33B611202BC5E0E6003DC930 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6111F2BC5E0E6003DC930 /* Operators.swift */; };
 		90D13E412BD2D4CB0049348C /* PlotPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D13E402BD2D4CB0049348C /* PlotPoint.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		334827BF2BD05661006864D5 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		334827C12BD0567C006864D5 /* TextExportDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExportDocument.swift; sourceTree = "<group>"; };
 		33B610E52BC5E037003DC930 /* Bifurcation Diagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bifurcation Diagram.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B610E82BC5E037003DC930 /* Bifurcation_DiagramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifurcation_DiagramApp.swift; sourceTree = "<group>"; };
 		33B610EA2BC5E037003DC930 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,7 +58,6 @@
 		33B611172BC5E0A3003DC930 /* PlotDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotDataStruct.swift; sourceTree = "<group>"; };
 		33B6111B2BC5E0CA003DC930 /* PlotDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotDataClass.swift; sourceTree = "<group>"; };
 		33B6111D2BC5E0D4003DC930 /* PlotClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotClass.swift; sourceTree = "<group>"; };
-		33B6111F2BC5E0E6003DC930 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		90D13E402BD2D4CB0049348C /* PlotPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,9 +116,7 @@
 				33B611172BC5E0A3003DC930 /* PlotDataStruct.swift */,
 				33B6111B2BC5E0CA003DC930 /* PlotDataClass.swift */,
 				33B6111D2BC5E0D4003DC930 /* PlotClass.swift */,
-				33B6111F2BC5E0E6003DC930 /* Operators.swift */,
 				334827BF2BD05661006864D5 /* TextView.swift */,
-				334827C12BD0567C006864D5 /* TextExportDocument.swift */,
 				90D13E402BD2D4CB0049348C /* PlotPoint.swift */,
 				33B610EC2BC5E039003DC930 /* Assets.xcassets */,
 				33B610EE2BC5E039003DC930 /* Bifurcation_Diagram.entitlements */,
@@ -287,7 +281,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B610EB2BC5E037003DC930 /* ContentView.swift in Sources */,
-				33B611202BC5E0E6003DC930 /* Operators.swift in Sources */,
 				90D13E412BD2D4CB0049348C /* PlotPoint.swift in Sources */,
 				33B6111E2BC5E0D4003DC930 /* PlotClass.swift in Sources */,
 				33B6111C2BC5E0CA003DC930 /* PlotDataClass.swift in Sources */,
@@ -296,7 +289,6 @@
 				334827C02BD05661006864D5 /* TextView.swift in Sources */,
 				33B611182BC5E0A3003DC930 /* PlotDataStruct.swift in Sources */,
 				33B610E92BC5E037003DC930 /* Bifurcation_DiagramApp.swift in Sources */,
-				334827C22BD0567C006864D5 /* TextExportDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

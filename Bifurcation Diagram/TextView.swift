@@ -26,7 +26,7 @@ struct TextView: View {
                     .foregroundColor(.gray)
                 TextEditor(text: $plotData.plotArray[0].calculatedText)
                     .frame(width: width, height: height)
-                    .border(Color.gray, width: 1)
+                
             }
 
             VStack {
@@ -50,7 +50,7 @@ struct TextView: View {
                     set: { _ in }
                 ))
                 .frame(width: secondTextWidth, height: secondTextHeight)
-                .border(Color.gray, width: 1)
+   
             }
         }
         .padding()
