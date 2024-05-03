@@ -10,31 +10,34 @@ import Foundation
 import SwiftUI
 import Observation
 
+// Observable class that manages the data and settings for plotting diagrams.
 @Observable class PlotDataClass {
     
+    // Holds the actual plot data points as an array of PlotDataStruct.
     @MainActor var plotData = [PlotDataStruct]()
+    // Manages settings for plot appearance such as axis labels, limits, and colors.
     @MainActor var changingPlotParameters: ChangingPlotParameters = ChangingPlotParameters()
+    // This holds text that used for calculation
     @MainActor var calculatedText = ""
+    // This tracks the number of points plotted.
     @MainActor var pointNumber = 1.0
     
+    
+    // Initializes the class with an option to start with a blank plot.
     init(fromLine line: Bool) {
         
         Task{
             await self.plotBlank()
             
         }
-        
     }
-    
-    
-    
     /// Displays a Blank Chart
     @MainActor func plotBlank()
     {
-        
+    // Clears any existing data.
         zeroData()
         
-        //set the Plot Parameters
+        // Set the Plot Parameters with initial values.
         changingPlotParameters.yMax = 1.0
         changingPlotParameters.yMin = 0.0
         changingPlotParameters.xMax = 4.0
@@ -52,7 +55,10 @@ import Observation
     /// Zeros Out The Data Being Plotted
     @MainActor func zeroData(){
         
+        // Empty the data array.
         plotData = []
+        
+        // Reset the point counter.
         pointNumber = 1.0
         
     }

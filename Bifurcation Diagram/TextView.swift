@@ -18,6 +18,7 @@ struct TextView: View {
     @State private var secondTextWidth: CGFloat = 150
     @State private var secondTextHeight: CGFloat = 50
     
+    //Title for the first textview box in the second tab.
     var body: some View {
         HStack(spacing: 20) {
             VStack {
@@ -34,7 +35,7 @@ struct TextView: View {
                     .font(.largeTitle)
                     .foregroundColor(.gray)
             }
-
+            //Title for the second textview box in the 2nd tab.
             VStack {
                 Text("Calculated Feigenbaum Constant")
                     .font(.headline)
