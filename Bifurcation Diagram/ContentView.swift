@@ -49,6 +49,7 @@ struct ContentView: View {
                 .frame(alignment: .center)
             }
          
+            //We have a button for plotting the logistic map
             
             Button("Plot Logistic Map") {
                 Task {
